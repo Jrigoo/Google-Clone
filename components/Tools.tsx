@@ -1,5 +1,7 @@
 import React from "react";
+import { HeaderOption } from "./HeaderOption";
 import { SearchIcon } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 import {
   LocationMarkerIcon,
   PhotographIcon,
@@ -10,35 +12,74 @@ import {
 
 interface Props {
   className: string;
+  searchTxt: string;
 }
 
-export const Tools: React.FC<Props> = ({ className }) => {
+export const Tools: React.FC<Props> = ({ className, searchTxt }) => {
+  const options = [
+    { Icon: SearchIcon, title: "All" },
+    { Icon: PhotographIcon, title: "Images" },
+    { Icon: PlayIcon, title: "Videos" },
+    { Icon: NewspaperIcon, title: "News" },
+    { Icon: LocationMarkerIcon, title: "Maps" },
+    { Icon: DotsVerticalIcon, title: "More" },
+  ];
+  const router = useRouter();
+
   return (
-    <section className={` ${className}`}>
-      <button className="toolBtn group">
-        <SearchIcon className="toolBtnIcon" />
-        All
-      </button>
-      <button className="toolBtn group">
-        <PhotographIcon className="toolBtnIcon" />
-        Images
-      </button>
-      <button className="toolBtn group">
-        <PlayIcon className="toolBtnIcon" />
-        Videos
-      </button>
-      <button className="toolBtn group">
-        <NewspaperIcon className="toolBtnIcon" />
-        News
-      </button>
-      <button className="toolBtn group">
-        <LocationMarkerIcon className="toolBtnIcon" />
-        Maps
-      </button>
-      <button className="toolBtn group">
-        <DotsVerticalIcon className="toolBtnIcon" />
-        More
-      </button>
+    <section className={`${className}`}>
+      {options.map((option, idx) => {
+        if (!router.query.option) {
+          if (idx === 0)
+            return (
+              <div
+                key={idx}
+                onClick={() =>
+                  router.push(
+                    `/search?term=${searchTxt}&option=${option.title}`
+                  )
+                }
+              >
+                <HeaderOption
+                  Icon={option.Icon}
+                  title={option.title}
+                  selected={true}
+                />
+              </div>
+            );
+        }
+
+        if (router.query.option === option.title) {
+          return (
+            <div
+              key={idx}
+              onClick={() =>
+                router.push(`/search?term=${searchTxt}&option=${option.title}`)
+              }
+            >
+              <HeaderOption
+                Icon={option.Icon}
+                title={option.title}
+                selected={true}
+              />
+            </div>
+          );
+        }
+        return (
+          <div
+            key={idx}
+            onClick={() =>
+              router.push(`/search?term=${searchTxt}&option=${option.title}`)
+            }
+          >
+            <HeaderOption
+              Icon={option.Icon}
+              title={option.title}
+              selected={false}
+            />
+          </div>
+        );
+      })}
     </section>
   );
 };

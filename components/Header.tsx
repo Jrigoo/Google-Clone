@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+
 import { useRouter } from "next/router";
 import {
   SearchIcon,
@@ -7,6 +8,7 @@ import {
   XIcon,
   ViewGridIcon,
 } from "@heroicons/react/solid";
+
 import { CogIcon } from "@heroicons/react/outline";
 import { Avatar } from "./Avatar";
 import { Tools } from "./Tools";
@@ -27,18 +29,19 @@ export const Header = () => {
   }
   const handleSubmit: React.FormEventHandler = (e) => {
     e.preventDefault();
-    router.push(`/search?term=${searchTxt}`);
+    router.push(`/search?term=${searchTxt}&option=${router.query.option}`);
   };
 
   return (
     <header className="sticky top-0 bg-white grid grid-cols-2 gap-y-4 p-5 grid-flow-row-dense sm:grid-cols-12 sm:gap-x-2 lg:p-8 border">
+      {/* Google Image */}
       <div className="flex items-center justify-self-start sm:col-span-2">
         <Image
           src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
           alt="Google image"
           width={120}
           height={40}
-          className="object-contain"
+          className="object-contain cursor-pointer"
           onClick={() => router.push("/")}
         />
       </div>
@@ -52,7 +55,7 @@ export const Header = () => {
 
       {/* SearchBox */}
       <form className="col-span-2 sm:col-start-3 sm:col-span-7 sm:justify-start lg:col-span-6">
-        <div className="flex items-center px-5 py-2 hover:shadow-lg focus-within:shadow-lg rounded-full border-gray-200 border">
+        <div className="flex items-center px-5 py-2 hover:shadow-sm focus-within:shadow-sm rounded-full border-gray-200 border">
           <input
             type="text"
             className="w-1/3 focus:outline-none flex-grow"
@@ -60,16 +63,16 @@ export const Header = () => {
             value={searchTxt}
             onChange={handleInput}
           />
-          {X ? (
+
+          {X && (
             <XIcon
               className="w-5 mx-2 text-gray-700 cursor-pointer transition delay-100 hover:scale-125"
               onClick={handleX}
             />
-          ) : (
-            ""
           )}
+
           <div className="border-l border-gray-200 flex items-center">
-            <MicrophoneIcon className="w-5 mx-2 text-gray-700" />
+            <MicrophoneIcon className="w-5 mx-2 text-gray-700 cursor-pointer" />
             <button type="submit" onClick={handleSubmit}>
               <SearchIcon className="w-5 text-gray-700" />
             </button>
@@ -78,7 +81,10 @@ export const Header = () => {
       </form>
 
       {/* Tools */}
-      <Tools className="flex flex-wrap justify-around text-gray-700 font-medium col-span-2 sm:col-start-3 sm:col-span-8 sm:justify-start" />
+      <Tools
+        className="flex flex-wrap justify-around text-gray-700 font-medium col-span-2 sm:col-start-3 sm:col-span-8 sm:justify-start"
+        searchTxt={searchTxt}
+      />
     </header>
   );
 };

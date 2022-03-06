@@ -18,7 +18,7 @@ const Home: NextPage = () => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const formData = Object.fromEntries(form.entries());
-    router.push(`/search?term=${formData.term}`);
+    router.push(`/search?term=${formData.term}&option=All`);
   };
 
   return (
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
           className="object-contain"
         />
 
-        <div className="w-md sm:w-1/2 flex items-center mt-5 px-5 py-3 hover:shadow-lg focus-within:shadow-lg rounded-full border-gray-200 border">
+        <div className="w-md sm:w-1/2 flex items-center mt-5 px-5 py-3 hover:shadow-sm focus-within:shadow-sm rounded-full border-gray-200 border">
           <SearchIcon className="w-5 text-gray-700" />
           <input
             type="text"
