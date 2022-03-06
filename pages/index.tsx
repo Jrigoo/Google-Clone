@@ -74,8 +74,12 @@ const Home: NextPage = () => {
 
         {/* Buttons */}
         <div className="w-5/6 sm:1/2 mt-8 flex justify-center">
-          <button className="btn mx-1">Google Search</button>
-          <button className="btn mx-1">I&apos;m Feeling Lucky</button>
+          <button className="btn mx-1" type="submit">
+            Google Search
+          </button>
+          <button className="btn mx-1" type="submit">
+            I&apos;m Feeling Lucky
+          </button>
         </div>
       </form>
 
