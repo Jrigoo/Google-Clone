@@ -12,3 +12,4 @@
 - For icons: **Hero Ioncs**
 - For fetching the data it uses the **Google search API** (Take in count that the API key is limited to 100 searchs)
 - This app is responsive with a minimum of **320px**
+- You can see the result [here](https://google-clone-pi-rouge.vercel.app/)
