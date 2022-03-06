@@ -25,7 +25,7 @@ const Home: NextPage = () => {
     <main className="h-screen flex flex-col">
       <Head>
         <title>Google</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/GoogleIcon.png" />
       </Head>
 
       {/* <Header/> */}
