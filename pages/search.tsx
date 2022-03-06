@@ -13,7 +13,6 @@ interface Props {
 }
 
 const Search: NextPage<Props> = ({ results }) => {
-  console.log(results);
   const router = useRouter();
   return (
     <>
