@@ -9,7 +9,7 @@ interface Props {
 export const HeaderOption: React.FC<Props> = ({ Icon, title, selected }) => {
   return (
     <div
-      className={`flex items-center space-x-1 border-b-4 border-transparent pb-2 px-1 cursor-pointer m-1 group ${
+      className={`flex items-center border-b-4 border-transparent pb-2 px-1 cursor-pointer m-1 group ${
         selected && "text-google-blue border-b-google-blue"
       }`}
     >
