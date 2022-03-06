@@ -1,5 +1,7 @@
 import type { NextPage } from "next";
 import React from "react";
+
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
 
@@ -10,6 +12,15 @@ import { Avatar } from "../components/Avatar";
 import { Footer } from "../components/Footer";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
+  const search: React.FormEventHandler = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target as HTMLFormElement);
+    const formData = Object.fromEntries(form.entries());
+    router.push(`/search?term=${formData.term}`);
+  };
+
   return (
     <main className="h-screen flex flex-col">
       <Head>
@@ -39,7 +50,10 @@ const Home: NextPage = () => {
       </header>
 
       {/* <Body/> */}
-      <form className="mt-10 flex flex-col items-center flex-grow">
+      <form
+        className="mt-10 flex flex-col items-center flex-grow"
+        onSubmit={search}
+      >
         <Image
           src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
           alt="Google image"
@@ -50,10 +64,15 @@ const Home: NextPage = () => {
 
         <div className="w-md sm:w-1/2 flex items-center mt-5 px-5 py-3 hover:shadow-lg focus-within:shadow-lg rounded-full border-gray-200 border">
           <SearchIcon className="w-5 text-gray-700" />
-          <input type="text" className="focus:outline-none mx-3 flex-grow" />
+          <input
+            type="text"
+            className="focus:outline-none mx-3 flex-grow"
+            name="term"
+          />
           <MicrophoneIcon className="w-5 text-gray-700" />
         </div>
 
+        {/* Buttons */}
         <div className="w-5/6 sm:1/2 mt-8 flex justify-center">
           <button className="btn mx-1">Google Search</button>
           <button className="btn mx-1">I&apos;m Feeling Lucky</button>
