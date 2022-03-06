@@ -12,7 +12,7 @@ import {
 
 interface Props {
   className: string;
-  searchTxt: string;
+  searchTxt: string | string[];
 }
 
 export const Tools: React.FC<Props> = ({ className, searchTxt }) => {

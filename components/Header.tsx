@@ -14,17 +14,13 @@ import { Avatar } from "./Avatar";
 import { Tools } from "./Tools";
 
 export const Header = () => {
-  const [searchTxt, setSearchTxt] = React.useState("");
-  const [X, setX] = React.useState(false);
   const router = useRouter();
+  const [searchTxt, setSearchTxt] = React.useState(router.query.term || "");
 
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchTxt(e.target.value);
-    setX(true);
-    if (!e.target.value) setX(false);
   }
   function handleX() {
-    setX(false);
     setSearchTxt("");
   }
   const handleSubmit: React.FormEventHandler = (e) => {
@@ -64,7 +60,7 @@ export const Header = () => {
             onChange={handleInput}
           />
 
-          {X && (
+          {searchTxt && (
             <XIcon
               className="w-5 mx-2 text-gray-700 cursor-pointer transition delay-100 hover:scale-125"
               onClick={handleX}
